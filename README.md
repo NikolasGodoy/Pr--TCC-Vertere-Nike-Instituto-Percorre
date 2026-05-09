@@ -33,7 +33,7 @@ O projeto contempla a recriação fiel do layout das seguintes páginas:
 
 ---
 
-## 👥 Equipe Vertera
+## 👥 Equipe Vertere
 
 Este projeto foi desenvolvido colaborativamente pela equipe da consultoria **Vertera**:
 
