@@ -1,0 +1,227 @@
+/* TÓPICO 1: RESET E PADRÕES GERAIS */
+* {                                    /* O asterisco seleciona todas as tags do HTML de uma vez só. Usado para "limpar" os padrões do navegador. */
+    margin: 0;                         /* Remove a margem externa padrão. Efeito: tudo encosta nas bordas da tela. */
+    padding: 0;                        /* Remove o espaçamento interno padrão. Efeito: os textos perdem aquela "gordurinha" invisível em volta. */
+    box-sizing: border-box;            /* Garante que bordas não aumentem o tamanho total de um elemento. Efeito: evita barras de rolagem indesejadas. */
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Define a família de letras. Efeito: o site inteiro fica com a tipografia oficial. */
+}
+
+body {                                 /* Seleciona o corpo visível da página. Tudo que o usuário vê está aqui dentro. */
+    background-color: #ffffff;         /* Define a cor de fundo. Efeito: a página inteira fica com um fundo branco limpo. */
+    color: #111111;                    /* Define a cor principal das palavras. Efeito: os textos normais ficam quase pretos (mais confortáveis para leitura). */
+}
+
+h1, h2, h3, h4 {                       /* Agrupa todos os tamanhos de títulos do site para receberem a mesma regra. */
+    font-weight: 900;                  /* Altera o peso (grossura) da fonte para o máximo. Efeito: Títulos ficam bem impactantes. */
+}
+
+a {                                    /* Seleciona as âncoras, ou seja, todos os links clicáveis do site. */
+    text-decoration: none;             /* Remove a decoração do link. Efeito: some aquele sublinhado feio padrão da internet. */
+    color: inherit;                    /* Pede para herdar a cor do elemento em volta. Efeito: o link não fica azul, respeita a cor do layout. */
+}
+
+/* TÓPICO 2: ESTRUTURA DE LAYOUT PRINCIPAL */
+.container {                           /* É a caixa invisível que segura o site no meio, para não esparramar pela tela. */
+    width: 100%;                       /* Pede para a caixa usar todo o espaço possível disponível. */
+    margin: 0 auto;                    /* Define margem zero em cima/embaixo, e 'auto' nas laterais. Efeito: O site fica perfeitamente centralizado. */
+    padding: 0 20px;                   /* Cria um espaço interno nas laterais. Efeito: No celular, o texto não cola nas beiradas. */
+}
+
+/* TÓPICO 3: CABEÇALHO E NAVEGAÇÃO */
+header {                               /* Seleciona toda a barra superior (logo e menus). */
+    border-bottom: 1px solid #e5e5e5;  /* Cria a borda inferior. Efeito: Uma linha cinza muito fina separa o cabeçalho do resto da loja. */
+    padding: 20px 0;                   /* Aumenta a altura da barra. Efeito: Dá 20 pixels de respiro em cima e embaixo da logo. */
+}
+
+header .container {                    /* Pega só a caixa centralizadora que está especificamente dentro do cabeçalho. */
+    display: flex;                     /* Ativa a tecnologia Flexbox. Efeito: Prepara os elementos internos para se alinharem horizontalmente. */
+    justify-content: space-between;    /* Pega o espaço vazio e joga no meio. Efeito: A logo gruda na parede esquerda e os menus na parede direita. */
+    align-items: center;               /* Regra de alinhamento vertical. Efeito: A logo e os textos ficam alinhados bem no meio da barra. */
+}
+
+header nav ul {                        /* Seleciona a lista (ul) que guarda os links do menu de navegação (nav). */
+    display: flex;                     /* Ativa o Flexbox na lista. Efeito: Os links ficam um ao lado do outro na horizontal. */
+    gap: 24px;                         /* Cria um buraco entre os itens. Efeito: Separa cada link com exatamente 24 pixels de distância. */
+    list-style: none;                  /* Tira o estilo de lista do HTML. Efeito: Remove as bolinhas pretas que marcam as listas. */
+}
+
+header nav ul li a {                   /* Atinge o texto final clicável do menu. */
+    font-size: 14px;                   /* Altera o tamanho. Efeito: As palavras do menu ficam num tamanho delicado e profissional. */
+    text-transform: uppercase;         /* Transforma a caixa de texto. Efeito: Força todas as letras a ficarem MAIÚSCULAS no menu. */
+    color: #111111;                    /* Colore a letra. Efeito: Ficam num tom escuro sólido para dar leitura. */
+}
+
+header nav ul li a:hover {             /* Estado hover: ativado SÓ quando a setinha do mouse passa em cima do link. */
+    color: #757575;                    /* Muda a cor da letra. Efeito: O texto escuro fica cinza, avisando que é clicável. */
+}
+
+/* TÓPICO 4: LAYOUT DA PÁGINA DO PRODUTO */
+main {                                 /* A tag que engloba o conteúdo principal (galeria na esquerda, compras na direita). */
+    display: flex;                     /* Ativa Flexbox. Efeito: Coloca a galeria de fotos e a coluna de compras lado a lado. */
+    justify-content: space-between;    /* Joga o espaço pro meio. Efeito: Galeria vai toda pra esquerda e coluna de compra toda pra direita. */
+    max-width: 1200px;                 /* Trava a largura. Efeito: Impede que o site fique gigante em TVs largas. */
+    margin: 0 auto;                    /* Efeito: Centraliza esse bloco inteiro de 1200px na tela do computador. */
+    padding: 40px 20px;                /* Afasta o conteúdo. Efeito: Dá uma distância confortável de 40px abaixo do cabeçalho. */
+}
+
+/* TÓPICO 5: GALERIA DE FOTOS */
+.gallery {                             /* A caixa invisível que engloba todas as 4 fotos do produto. */
+    width: 65%;                        /* Define a largura dessa área. Efeito: As fotos dominam 65% da tela, sendo o foco principal. */
+}
+
+.gallery article {                     /* A caixinha que segura uma foto individual. */
+    display: inline-block;             /* Comportamento de bloco alinhado. Efeito: Permite que as caixinhas fiquem lado a lado. */
+    width: 48%;                        /* Tamanho de cada caixa. Efeito: Como cada uma tem 48%, cabem exatamente duas fotos por linha. */
+    margin: 0 1% 15px 0;               /* Margem externa. Efeito: Cria a separação lateral e vertical perfeita (a grade manual). */
+    background-color: #f5f5f5;         /* Cor de fundo da caixa. Efeito: Pinta um cinza claro atrás da foto. */
+    border-radius: 4px;                /* Borda arredondada. Efeito: Quebra as quinas duras da caixinha. */
+}
+
+.gallery img {                         /* A tag da foto propriamente dita. */
+    width: 100%;                       /* Pede para a foto ocupar todo o espaço do article. Efeito: A foto se estica perfeitamente no quadro dela. */
+    border-radius: 4px;                /* Borda arredondada na imagem. Efeito: Acompanha o arredondamento da caixa pai. */
+}
+
+/* TÓPICO 6: COLUNA DIREITA (INFORMAÇÕES E PREÇO) */
+aside {                                /* A tag lateral que segura título, preço e botões. */
+    width: 30%;                        /* Largura da área. Efeito: Pega 30% da tela (sobrando 5% de espaço no meio). */
+}
+
+.category {                            /* A palavra "Casual" que fica abaixo do título. */
+    margin-top: 8px;                   /* Empurra o elemento de cima. Efeito: Desgruda a palavra do nome grandão da camisa/tênis. */
+    font-size: 14px;                   /* Tamanho pequeno da fonte para parecer um detalhe. */
+    color: #757575;                    /* Pinta de cinza médio para não roubar a atenção do título. */
+}
+
+.box-preco {                           /* A caixa invisível que agrupou o preço cheio e o parcelamento. */
+    margin: 24px 0 32px 0;             /* Margens verticais. Efeito: Cria isolamento do preço em relação ao título em cima e tamanhos embaixo. */
+}
+
+.preco-destaque {                      /* A classe do preço principal em destaque. */
+    font-size: 20px;                   /* Aumenta a letra. Efeito: Chama a atenção para o valor principal. */
+    font-weight: 900;                  /* Deixa o texto bem grosso e marcante. */
+    color: #111111;                    /* Efeito: Retorna a cor para preto sólido para leitura fácil. */
+    margin-bottom: 4px;                /* Efeito: Dá só 4 pixels pra separar o valor grandão do parcelamento miúdo abaixo. */
+}
+
+.preco-parcelado {                     /* A classe que diz o valor das parcelas. */
+    font-size: 14px;                   /* Letra bem menorzinha. */
+    color: #757575;                    /* Letra cinza. Efeito: Aparência de texto de suporte. */
+}
+
+.section-title {                       /* A palavra "Tamanho" em cima das opções. */
+    font-size: 24px;                   /* Aumenta o tamanho pra dar um ar de nova seção na lateral. */
+    margin-bottom: 18px;               /* Efeito: Empurra os botões um pouco para baixo para não amontoar. */
+}
+
+/* TÓPICO 7: GRADE DE BOTÕES DE TAMANHO */
+.sizes button {                        /* Atinge especificamente cada botãozinho de tamanho. */
+    display: inline-block;             /* Comportamento de bloco em linha. Efeito: Dá largura ao botão sem que ele roube a linha toda. */
+    width: 23%;                        /* Largura do botão. Efeito: Definindo 23%, cabem exatamente 4 botões lado a lado por linha. */
+    margin: 0 1% 12px 0;               /* Afasta os botões. Efeito: Cria a grade perfeita sem precisar usar código Grid oficial. */
+    padding: 14px 0;                   /* Preenchimento interno vertical. Efeito: Deixa o botão mais "gordo", melhorando o clique. */
+    border: 1px solid #e5e5e5;         /* Cria a linha em volta do botão na cor cinza clara. */
+    background-color: #ffffff;         /* Pinta o fundo de branco. */
+    border-radius: 8px;                /* Arredonda levemente as quinas. */
+    font-size: 14px;                   /* Tamanho padrão do texto dentro do botão. */
+}
+
+.sizes button:hover {                  /* Efeito acionado apenas se o mouse passar sobre o tamanho. */
+    border: 1px solid #111111;         /* A borda cinza muda para preta. Efeito: Dá a sensação de foco/interatividade. */
+}
+
+/* TÓPICO 8: BOTÃO PRINCIPAL "COMPRAR" */
+.cart-actions {                        /* Caixa que segura a ação principal de venda. */
+    margin-top: 56px;                  /* Distância pesada. Efeito: Isola e destaca bem o botão "Comprar". */
+}
+
+.btn-cart {                            /* O botão "Comprar" em si. */
+    display: inline-block;             /* Permite aplicação de bloco (largura/altura). */
+    width: 100%;                       /* Efeito: O botão se estica inteirinho na área lateral direita. Fica um botão grandão. */
+    padding: 14px 40px;                /* Engorda o botão com espaço interno para ele ficar alto. */
+    border: none;                      /* Tira as bordas nativas feias do navegador. */
+    border-radius: 30px;               /* Borda super arredondada. Efeito: Cria formato "pílula" clássico de grandes lojas. */
+    background-color: #111111;         /* Fundo quase preto. Efeito: Contraste máximo na tela. */
+    color: #ffffff;                    /* Letra branca pra dar leitura. */
+    font-weight: 900;                  /* A palavra COMPRAR fica bem grossa e afirmativa. */
+    font-size: 14px;                   /* Tamanho ideal pra leitura de botão. */
+    text-transform: uppercase;         /* Força a palavra para maiúscula. */
+    text-align: center;                /* Efeito: Alinha a palavra COMPRAR exatamente no centro do botão. */
+}
+
+.btn-cart:hover {                      /* Interação de quando o mouse passa no botão "Comprar". */
+    background-color: #757575;         /* O preto vira cinza escuro. Efeito: O usuário percebe a interatividade de clique. */
+}
+
+/* TÓPICO 9: RODAPÉ DIVIDIDO (NIKE + VERTERE) */
+.rodape-simples {                      /* Envelopa todas as informações do rodapé. */
+    margin-top: 50px;                  /* Afasta do conteúdo principal da loja. */
+    padding: 0 20px 40px 20px;         /* Ajusta distâncias para as laterais e estufa a parte inferior. */
+    text-align: center;                /* Centraliza os textos que não têm alinhamento específico. */
+    background-color: #ffffff;         /* Garante o fundo branco puro. */
+}
+
+.footer-linha {                       /* A linha de separação fina na base do site. */
+    border: none;                      /* Remove o formato padrão de linha 3D do navegador. */
+    border-top: 1px solid #e5e5e5;     /* Linha limpa de 1 pixel na cor cinza clara. */
+    margin-bottom: 32px;               /* Afasta a linha do conteúdo logo abaixo dela. */
+}
+
+/* A CLASSE .footer-container FOI APAGADA AQUI PORQUE ERA INÚTIL. ELA JÁ TEM WIDTH 100% POR NATUREZA. */
+
+.footer-bloco {                        /* A técnica para dividir a tela em duas colunas. */
+    display: inline-block;             /* Coloca o bloco da Nike e o da Vertere lado a lado na mesma linha. */
+    width: 48%;                        /* Cada bloco ocupa quase metade da tela (sobra um pequeno respiro no meio). */
+    min-width: 280px;                  /* GAMBIARRA RESPONSIVA: Se a tela for menor que 280px (celular), não tem espaço e as caixas quebram para a linha de baixo sozinhas! */
+    vertical-align: top;               /* ADIÇÃO CRÍTICA: Força as duas caixas a ficarem alinhadas pelo topo. Sem isso, uma ficaria mais baixa que a outra. */
+    padding: 0 15px;                   /* Dá um respiro interno para o texto não colar no vão central. */
+    margin-bottom: 24px;               /* Margem para não amontoar caso ocorra a quebra de linha no celular. */
+}
+
+/* ÁREA DA NIKE (LADO ESQUERDO) */
+.footer-bottom-copy {                  /* Caixa do texto "Todos os direitos reservados". */
+    margin-bottom: 24px;               /* Afasta as redes sociais para baixo. */
+    font-size: 12px;                   /* Letra pequena padronizada. */
+    color: #757575;                    /* Cinza discreto. */
+}
+
+.footer-title {                        /* Subtítulos de ambas as colunas (Redes Sociais / Desenvolvido por). */
+    font-size: 14px;                   /* Tamanho equilibrado. */
+    font-weight: 900;                  /* Texto grosso chamativo. */
+    margin-bottom: 16px;               /* Empurra as listas debaixo para não grudar no título. */
+    color: #111111;                    /* Preto sólido para destaque. */
+}
+
+.icones-redes a {                      /* A tag <a> que embrulha cada foto do FB, IG, YT. */
+    display: inline-block;             /* Transforma o link em bloco para aceitar margens. */
+    margin: 0 12px;                    /* Cria o vão espaçado perfeito entre uma rede social e outra. */
+}
+
+.icones-redes img {                    /* A imagem dos ícones. */
+    width: 40px;                       /* Trava no tamanho pequeno, resolvendo o problema original de fotos estouradas. */
+}
+
+/* ÁREA DA VERTERE (LADO DIREITO) */
+.titulo-vertere {                      /* O nome "Desenvolvido por Vertere". */
+    text-transform: uppercase;         /* Força a escrita em CAIXA ALTA, dando um tom forte de marca corporativa. */
+}
+
+.texto-vertere {                       /* O descritivo "Consultoria de estratégia...". */
+    font-size: 12px;                   /* Letra discreta. */
+    color: #757575;                    /* Cinza, para não competir com o título. */
+    margin-bottom: 24px;               /* SUBSTITUI O PRIMEIRO <BR>: Cria o espaço necessário antes dos contatos usando CSS correto. */
+}
+
+.contato-vertere {                     /* A lista <ul> de telefones e emails. */
+    list-style: none;                  /* Remove as bolinhas HTML da frente dos itens. */
+    font-size: 13px;                   /* Tamanho sutil. */
+    color: #111111;                    /* Cor quase preta de leitura principal. */
+}
+
+.contato-vertere li {                  /* Cada linha da sua lista de contato. */
+    margin-bottom: 12px;               /* SUBSTITUI OS OUTROS <BR>: Gera o espaçamento entre o Email, o Telefone e a Localização. Fica perfeito e semântico. */
+}
+
+.contato-vertere strong {              /* Palavras chaves (E-mail:, Telefone:). */
+    color: #757575;                    /* Deixa os rótulos em cinza, destacando seus dados reais que estão em preto ao lado. */
+}

@@ -1,0 +1,225 @@
+/* TÓPICO 1: RESET E PADRÕES GERAIS */
+* {                                    /* Seleciona todos os elementos do HTML de uma vez para limpar os padrões. */
+    margin: 0;                         /* Remove a margem externa padrão. Tudo encosta nas bordas da tela. */
+    padding: 0;                        /* Remove o espaçamento interno padrão. Os textos perdem o espaço invisível em volta. */
+    box-sizing: border-box;            /* Garante que bordas e paddings não aumentem o tamanho total do elemento, evitando quebras no layout. */
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Define a fonte oficial do site para manter a identidade visual. */
+}
+
+body {                                 /* A tag que engloba toda a parte visual do site. */
+    background-color: #ffffff;         /* Pinta o fundo da página inteira de branco. */
+    color: #111111;                    /* Define a cor do texto principal como quase preto para facilitar a leitura. */
+}
+
+a {                                    /* Seleciona todos os links do site (áreas clicáveis). */
+    text-decoration: none;             /* Tira aquele sublinhado feio padrão dos links. */
+    color: inherit;                    /* Faz o link usar a mesma cor do texto em volta dele, não ficando azul. */
+}
+
+/* TÓPICO 2: ESTRUTURA DE LAYOUT */
+.container {                           /* Caixa invisível para segurar e alinhar o conteúdo no meio da tela. */
+    width: 100%;                       /* A caixa tenta ocupar 100% da largura disponível no momento. */
+    margin: 0 auto;                    /* Margem auto nas laterais empurra a caixa perfeitamente pro centro da tela. */
+    padding: 0 20px;                   /* Dá uma distância interna de 20px pra não colar os textos nas bordas do celular. */
+}
+
+/* TÓPICO 3: CABEÇALHO E NAVEGAÇÃO COM FLEXBOX */
+header {                               /* Seleciona o cabeçalho inteiro no topo do site. */
+    border-bottom: 1px solid #e5e5e5;  /* Cria uma linha cinza fininha separando o cabeçalho do resto da loja. */
+    padding: 20px 0;                   /* Dá um espaço em cima e embaixo para o cabeçalho não ficar achatado. */
+}
+
+header .container {                    /* A caixa principal que está somente DENTRO do cabeçalho. */
+    display: flex;                     /* Ativa o Flexbox pra alinhar os itens (logo e menu) na horizontal. */
+    justify-content: space-between;    /* Pega o espaço vazio e joga no meio, empurrando a Logo pra esquerda e o Menu pra direita. */
+    align-items: center;               /* Alinha a Logo e o Menu perfeitamente no centro vertical da barra. */
+}
+
+header nav ul {                        /* Seleciona a lista de itens do menu. */
+    display: flex;                     /* Ativa o Flexbox pra colocar os links um do lado do outro na horizontal. */
+    gap: 24px;                         /* Cria um espaçamento exato e perfeito de 24px entre cada link do menu. */
+    list-style: none;                  /* Tira as bolinhas pretas padrão que o HTML coloca nas listas. */
+}
+
+header nav ul li a {                   /* Seleciona o texto em si do menu ("Camisa Brasil", etc). */
+    font-size: 14px;                   /* Deixa a fonte num tamanho delicado de 14px. */
+    text-transform: uppercase;         /* Transforma os links em MAIÚSCULAS automaticamente. */
+    color: #111111;                    /* Colore o link de quase preto. */
+}
+
+header nav ul li a:hover {             /* Interação ativada apenas quando o mouse passa em cima do link. */
+    color: #757575;                    /* O texto fica cinza, avisando o usuário que ele pode clicar ali. */
+}
+
+/* TÓPICO 4: LAYOUT PRINCIPAL DO PRODUTO (SEM GRID E SEM MEDIA QUERY) */
+main {                                 /* A área principal que guarda as fotos e as informações do produto. */
+    display: flex;                     /* Ativa Flexbox para colocar a Galeria na esquerda e o Aside na direita. */
+    justify-content: space-between;    /* Empurra a Galeria e o Aside para as bordas, deixando espaço no meio. */
+    max-width: 1200px;                 /* Trava o tamanho em telas muito grandes para o layout não esticar demais. */
+    margin: 0 auto;                    /* Centraliza toda a área principal na tela. */
+    padding: 40px 20px;                /* Afasta os elementos do cabeçalho dando 40px de respiro no topo. */
+}
+
+/* TÓPICO 5: GALERIA DE FOTOS (GAMBIARRA DO INLINE-BLOCK) */
+.gallery {                             /* A caixa que agrupa as 4 fotos do Air Max. */
+    width: 65%;                        /* A galeria domina a tela ocupando 65% do espaço total. */
+}
+
+.gallery article {                     /* A caixinha que segura cada foto individualmente. */
+    display: inline-block;             /* Permite definir largura mas mantém as caixas na mesma linha (lado a lado). */
+    width: 48%;                        /* Como cada foto tem 48%, cabem exatamente duas por linha (somando 96%). */
+    margin: 0 1% 15px 0;               /* Cria o "corredor" branco entre as fotos com 1% de margem e separa a linha debaixo com 15px. */
+    background-color: #f5f5f5;         /* Fundo cinza para destacar o tênis. */
+    border-radius: 4px;                /* Arredonda levemente as pontas da caixa. */
+    text-align: center;                /* Centraliza a imagem internamente caso ela seja menor que a caixa. */
+}
+
+.gallery img {                         /* A foto real do produto. */
+    width: 100%;                       /* Força a foto a preencher toda a largura da caixinha (article). */
+    border-radius: 4px;                /* Arredonda a foto para acompanhar a caixa e não vazar pelos cantos. */
+    /* GAMBIARRA: Ao não definir a altura (height), a imagem cresce até o limite que pode pra manter sua proporção, sem cortar nada. */
+}
+
+/* TÓPICO 6: INFORMAÇÕES LATERAIS DO PRODUTO */
+aside {                                /* A coluna direita onde fica título, preço e botões. */
+    width: 30%;                        /* Ocupa os 30% restantes da tela (65% galeria + 30% aside = sobram 5% de respiro no meio). */
+}
+
+.category {                            /* O texto menor ("Casual") abaixo do título. */
+    margin-top: 8px;                   /* Desgruda a categoria do título do tênis. */
+    font-size: 14px;                   /* Deixa pequeno, tamanho 14. */
+    color: #757575;                    /* Pinta de cinza médio para ser discreto. */
+}
+
+.box-preco {                           /* Agrupa o preço cheio e o parcelamento para tratá-los como um bloco só. */
+    margin: 24px 0 32px 0;             /* Isola o preço do resto das informações usando grandes margens acima e abaixo. */
+}
+
+.preco-destaque {                      /* O preço grandão de venda (R$ 1.139,99). */
+    font-size: 20px;                   /* Texto grande para ser facilmente visto. */
+    font-weight: 900;                  /* Texto em negrito super forte. */
+    color: #111111;                    /* Cor preta sólida para contraste. */
+    margin-bottom: 4px;                /* Dá um espaço mínimo para o parcelamento não grudar embaixo. */
+}
+
+.preco-parcelado {                     /* O texto que avisa as condições (10x sem juros). */
+    font-size: 14px;                   /* Fonte pequena. */
+    color: #757575;                    /* Pinta de cinza, mostrando que é uma informação de apoio. */
+}
+
+.section-title {                       /* A palavra "Tamanho" antes dos botões. */
+    font-size: 24px;                   /* Fica com aspecto de subtítulo grande. */
+    margin-bottom: 18px;               /* Dá um espaço abaixo para separar dos botões de número. */
+}
+
+/* TÓPICO 7: GRADE DE TAMANHOS (GAMBIARRA DO INLINE-BLOCK) */
+.sizes button {                        /* Os botões com numeração 38, 39, 40. */
+    display: inline-block;             /* Permite colocar larguras num botão sem que ele roube a linha toda, deixando os próximos subirem. */
+    width: 23%;                        /* Dá 23% pra cada botão. Cabem exatos 4 botões na mesma linha. */
+    margin: 0 1% 12px 0;               /* Distancia 1% para a direita de cada um e 12px pra baixo. O grid perfeito. */
+    padding: 14px 0;                   /* Preenche o botão por dentro, deixando ele alto e fácil de clicar no celular. */
+    border: 1px solid #e5e5e5;         /* Borda cinza fininha de botão de e-commerce moderno. */
+    background-color: #ffffff;         /* Fundo branco. */
+    border-radius: 8px;                /* Arredonda só as pontinhas dele. */
+    font-size: 14px;                   /* Tamanho padrão do texto (o número 38) dentro dele. */
+}
+
+.sizes button:hover {                  /* Apenas quando o mouse passa por cima do botão de tamanho. */
+    border: 1px solid #111111;         /* A bordinha cinza fica preta e forte, dando feedback visual de foco. */
+}
+
+/* TÓPICO 8: BOTÃO DE ADICIONAR AO CARRINHO */
+.cart-actions {                        /* Caixa que segura a ação principal ("Comprar"). */
+    margin-top: 56px;                  /* Afasta o botão agressivamente da área de tamanhos para ganhar destaque. */
+}
+
+.btn-cart {                            /* O Botão preto grandão. */
+    display: inline-block;             /* Permite aplicar largura total no elemento. */
+    width: 100%;                       /* O botão se estica pra cobrir toda a tela da coluna lateral. */
+    padding: 14px 40px;                /* Engorda o botão com espaço interno para ficar alto. */
+    border: none;                      /* Remove a borda padrão do HTML pro botão não ficar feio. */
+    border-radius: 30px;               /* Arredondamento agressivo (Pílula) típico do design da Nike. */
+    background-color: #111111;         /* Fundo quase-preto. Contraste máximo. */
+    color: #ffffff;                    /* Letra branca para dar leitura. */
+    font-weight: 900;                  /* Destaca a palavra COMPRAR em negrito. */
+    font-size: 14px;                   /* Letra em tamanho prático. */
+    text-transform: uppercase;         /* Força ser tudo em Caixa Alta. */
+    text-align: center;                /* Centraliza a palavra "Comprar" no meio do botão. */
+}
+
+.btn-cart:hover {                      /* Interação ao passar o mouse no botão Comprar. */
+    background-color: #757575;         /* O preto perde a cor e fica cinza escuro, indicando o clique. */
+}
+
+/* TÓPICO 9: RODAPÉ DIVIDIDO (NIKE + VERTERE) */
+.rodape-simples {                      /* Envelopa todas as informações do rodapé. */
+    margin-top: 50px;                  /* Afasta do conteúdo principal da loja. */
+    padding: 0 20px 40px 20px;         /* Ajusta distâncias para as laterais e estufa a parte inferior. */
+    text-align: center;                /* Centraliza os textos que não têm alinhamento específico. */
+    background-color: #ffffff;         /* Garante o fundo branco puro. */
+}
+
+.footer-linha {                       /* A linha de separação fina na base do site. */
+    border: none;                      /* Remove o formato padrão de linha 3D do navegador. */
+    border-top: 1px solid #e5e5e5;     /* Linha limpa de 1 pixel na cor cinza clara. */
+    margin-bottom: 32px;               /* Afasta a linha do conteúdo logo abaixo dela. */
+}
+
+/* A CLASSE .footer-container FOI APAGADA AQUI PORQUE ERA INÚTIL. ELA JÁ TEM WIDTH 100% POR NATUREZA. */
+
+.footer-bloco {                        /* A técnica para dividir a tela em duas colunas. */
+    display: inline-block;             /* Coloca o bloco da Nike e o da Vertere lado a lado na mesma linha. */
+    width: 48%;                        /* Cada bloco ocupa quase metade da tela (sobra um pequeno respiro no meio). */
+    min-width: 280px;                  /* GAMBIARRA RESPONSIVA: Se a tela for menor que 280px (celular), não tem espaço e as caixas quebram para a linha de baixo sozinhas! */
+    vertical-align: top;               /* ADIÇÃO CRÍTICA: Força as duas caixas a ficarem alinhadas pelo topo. Sem isso, uma ficaria mais baixa que a outra. */
+    padding: 0 15px;                   /* Dá um respiro interno para o texto não colar no vão central. */
+    margin-bottom: 24px;               /* Margem para não amontoar caso ocorra a quebra de linha no celular. */
+}
+
+/* ÁREA DA NIKE (LADO ESQUERDO) */
+.footer-bottom-copy {                  /* Caixa do texto "Todos os direitos reservados". */
+    margin-bottom: 24px;               /* Afasta as redes sociais para baixo. */
+    font-size: 12px;                   /* Letra pequena padronizada. */
+    color: #757575;                    /* Cinza discreto. */
+}
+
+.footer-title {                        /* Subtítulos de ambas as colunas (Redes Sociais / Desenvolvido por). */
+    font-size: 14px;                   /* Tamanho equilibrado. */
+    font-weight: 900;                  /* Texto grosso chamativo. */
+    margin-bottom: 16px;               /* Empurra as listas debaixo para não grudar no título. */
+    color: #111111;                    /* Preto sólido para destaque. */
+}
+
+.icones-redes a {                      /* A tag <a> que embrulha cada foto do FB, IG, YT. */
+    display: inline-block;             /* Transforma o link em bloco para aceitar margens. */
+    margin: 0 12px;                    /* Cria o vão espaçado perfeito entre uma rede social e outra. */
+}
+
+.icones-redes img {                    /* A imagem dos ícones. */
+    width: 40px;                       /* Trava no tamanho pequeno, resolvendo o problema original de fotos estouradas. */
+}
+
+/* ÁREA DA VERTERE (LADO DIREITO) */
+.titulo-vertere {                      /* O nome "Desenvolvido por Vertere". */
+    text-transform: uppercase;         /* Força a escrita em CAIXA ALTA, dando um tom forte de marca corporativa. */
+}
+
+.texto-vertere {                       /* O descritivo "Consultoria de estratégia...". */
+    font-size: 12px;                   /* Letra discreta. */
+    color: #757575;                    /* Cinza, para não competir com o título. */
+    margin-bottom: 24px;               /* SUBSTITUI O PRIMEIRO <BR>: Cria o espaço necessário antes dos contatos usando CSS correto. */
+}
+
+.contato-vertere {                     /* A lista <ul> de telefones e emails. */
+    list-style: none;                  /* Remove as bolinhas HTML da frente dos itens. */
+    font-size: 13px;                   /* Tamanho sutil. */
+    color: #111111;                    /* Cor quase preta de leitura principal. */
+}
+
+.contato-vertere li {                  /* Cada linha da sua lista de contato. */
+    margin-bottom: 12px;               /* SUBSTITUI OS OUTROS <BR>: Gera o espaçamento entre o Email, o Telefone e a Localização. Fica perfeito e semântico. */
+}
+
+.contato-vertere strong {              /* Palavras chaves (E-mail:, Telefone:). */
+    color: #757575;                    /* Deixa os rótulos em cinza, destacando seus dados reais que estão em preto ao lado. */
+}

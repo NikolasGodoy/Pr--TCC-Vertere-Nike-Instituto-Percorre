@@ -1,0 +1,256 @@
+/* TÓPICO 1: RESET E PADRÕES GERAIS */
+* {                                    /* O asterisco seleciona todos os elementos do site. */
+    margin: 0;                         /* Tira a margem padrão externa do navegador. O site cola nas bordas. */
+    padding: 0;                        /* Tira os respiros internos que o navegador coloca sozinho. */
+    box-sizing: border-box;            /* Fundamental: impede que a caixa estoure o tamanho quando você coloca borda ou padding. */
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Define a fonte oficial do site. */
+}
+
+body {                                 /* A tag body engloba tudo o que aparece na tela. */
+    background-color: #ffffff;         /* Pinta o fundo da tela inteira de branco. */
+    color: #111111;                    /* Define a cor padrão das palavras como um preto suave. */
+}
+
+h1, h2, h3, h4 {                       /* Agrupa todos os tamanhos de títulos do site para padronizar. */
+    font-weight: 900;                  /* Deixa os títulos bem grossos e chamativos (negrito forte). */
+}
+
+a {                                    /* Seleciona todos os links da página (tudo o que dá pra clicar). */
+    text-decoration: none;             /* Apaga a linha sublinhada padrão dos links da internet. */
+    color: inherit;                    /* O link herda a cor do elemento que está atrás dele (não fica azul). */
+}
+
+/* TÓPICO 2: ESTRUTURA DE LAYOUT */
+.container {                           /* É a caixa que organiza e segura os elementos no centro da tela. */
+    width: 100%;                       /* Pede para a caixa usar toda a largura possível. */
+    margin: 0 auto;                    /* Margem zero em cima/embaixo, e 'auto' nas laterais. Isso joga a caixa perfeitamente pro meio. */
+    padding: 0 20px;                   /* Cria uma proteção de 20px nas laterais para que no celular a letra não encoste na borda do vidro. */
+}
+
+/* TÓPICO 3: CABEÇALHO E NAVEGAÇÃO */
+header {                               /* O cabeçalho onde ficam a logo e os menus de navegação. */
+    border-bottom: 1px solid #e5e5e5;  /* Desenha a linha cinza bem fininha separando o cabeçalho do restante da página. */
+    padding: 20px 0;                   /* Aumenta a altura da barra dando 20px de respiro acima e abaixo do conteúdo interno. */
+}
+
+header .container {                    /* Pega só a caixa centralizadora específica que está dentro do cabeçalho. */
+    display: flex;                     /* Ativa a magia do Flexbox para alinhar itens horizontalmente. */
+    justify-content: space-between;    /* Pega o espaço vazio e joga no meio. A logo é jogada pra esquerda e o menu pra direita. */
+    align-items: center;               /* Centraliza a logo e o menu na linha vertical para nada ficar mais alto que o outro. */
+}
+
+header nav ul {                        /* A lista de links de navegação. */
+    display: flex;                     /* Usa o Flexbox de novo, agora para colocar os nomes do menu um do lado do outro. */
+    gap: 24px;                         /* Cria um espaçamento perfeito e igual de 24 pixels entre cada link. */
+    list-style: none;                  /* Tira as bolinhas pretas feias da formatação padrão de listas. */
+}
+
+header nav ul li a {                   /* Atinge especificamente a palavra clicável do menu. */
+    font-size: 14px;                   /* Deixa o tamanho da fonte com aspecto moderno (pequeno e elegante). */
+    text-transform: uppercase;         /* Força as letras do menu a ficarem MAIÚSCULAS independente do HTML. */
+    color: #111111;                    /* Coloca uma cor quase preta para garantir boa leitura. */
+}
+
+header nav ul li a:hover {             /* Regra que só ativa quando o usuário passa o mouse por cima do link do menu. */
+    color: #757575;                    /* O texto muda pra cor cinza, indicando que pode ser clicado (feedback visual). */
+}
+
+/* TÓPICO 4: CARROSSEL (BANNER PRINCIPAL) */
+#hero-carousel {                       /* A área gigante que guarda as grandes imagens rotativas (banners). */
+    position: relative;                /* Transforma essa área no ponto zero de referência para podermos colocar os botões soltos flutuando dentro dela. */
+    width: 100%;                       /* O banner ocupa a tela inteira na largura. */
+    height: 35vw;                      /* Altura dinâmica baseada na largura da tela, mantém o aspecto Widescreen. */
+    min-height: 400px;                 /* Trava a altura em 400px. Assim, no celular a imagem não fica achatada parecendo um palito. */
+    background-color: #f5f5f5;         /* Fundo cinza caso a imagem demore para carregar na internet lenta. */
+}
+
+.slider-container {                    /* A caixinha invisível que segura as duas imagens do banner. */
+    position: relative;                /* Ajuda a não perder o posicionamento interno caso mudemos algo. */
+    width: 100%;                       /* Ocupa a largura total do carrossel pai. */
+    height: 100%;                      /* Ocupa a altura total do carrossel pai. */
+}
+
+.slide {                               /* A regra base que as duas fotos do banner dividem. */
+    position: absolute;                /* Tira a foto do fluxo normal e faz ela "flutuar". É assim que colocamos uma foto em cima da outra no mesmo lugar. */
+    top: 0;                            /* Cola a foto exatamente no teto do carrossel. */
+    left: 0;                           /* Cola a foto exatamente na parede esquerda. */
+    width: 100%;                       /* Estica a caixa da foto até preencher a tela inteira. */
+    height: 100%;                      /* Estica a caixa da foto até preencher a altura toda. */
+    background-size: cover;            /* Mágica braba: a foto cresce cobrindo tudo sem distorcer ou amassar, cortando só os excessos necessários. */
+    background-position: center;       /* Garante que o umbigo da foto vai estar sempre no centro da tela. */
+}
+
+#slide2 {                              /* Regra específica para o Banner 2 (O do Joga Sinistro). */
+    display: none;                     /* Apaga o banner 2 da existência. O site carrega mostrando só o Banner 1. */
+}
+
+#slide2:target {                       /* A regra mais importante do carrossel. É acionada se a URL do site tiver '#slide2' (após clique na seta ou bolinha). */
+    display: block;                    /* O Banner 2 volta a existir e, como flutua, aparece em cima do Banner 1. */
+}
+
+.slide-content {                       /* Caixa invisível pra posicionar o botão "Garantir a minha" dentro da imagem. */
+    position: absolute;                /* Solta a caixa para posicionar livremente dentro da imagem pai. */
+    bottom: 50px;                      /* Levanta a caixa do botão a 50px de distância do chão da foto. */
+    left: 0;                           /* Inicia a caixa encostada do lado esquerdo para o width 100% debaixo funcionar. */
+    width: 100%;                       /* Pega toda a largura da tela para o text-align em seguida achar o centro verdadeiro. */
+    text-align: center;                /* Joga o botão no centro horizontal perfeito da foto. */
+}
+
+/* TÓPICO 5: BOTÃO DE AÇÃO (DENTRO DO BANNER) */
+.btn-hero {                            /* O botão branco que fica no meio da foto do carrossel. */
+    display: inline-block;             /* Permite dar dimensões de bloco (padding alto) para a palavra sem quebrar a linha toda. */
+    padding: 14px 40px;                /* Cria o "corpo" do botão: 14px de altura e 40px esticando para os lados. */
+    border-radius: 30px;               /* Arredondamento agressivo. É o que cria a famosa aparência de "pílula". */
+    font-weight: 700;                  /* Letra negrita para chamar a atenção para a compra. */
+    font-size: 14px;                   /* Tamanho equilibrado. */
+    text-transform: uppercase;         /* Força o texto "Garantir a minha" ficar CAIXA ALTA, dando estilo de urgência. */
+    background-color: #ffffff;         /* Pinta o botão de branco. */
+    color: #000000;                    /* O texto fica preto para contrastar com o fundo branco. */
+}
+
+.btn-hero:hover {                      /* Interação de passar o mouse no botão. */
+    background-color: #cccccc;         /* O branco fica cinza claro, o feedback de clique padrão. */
+}
+
+/* CONTROLES DO CARROSSEL (BOLINHAS E SETAS) */
+.slider-dots {                         /* Caixa que guarda as bolinhas no chão do carrossel. */
+    position: absolute;                /* Solta a caixa para se posicionar de forma livre sobre as imagens. */
+    bottom: 20px;                      /* Desce a caixa para ficar a 20 pixels da base do banner. */
+    width: 100%;                       /* Pega a tela inteira. */
+    display: flex;                     /* Aciona o Flexbox para alinhar as bolinhas com facilidade. */
+    justify-content: center;           /* Joga todas as bolinhas pro centro. */
+    gap: 12px;                         /* Dá exatos 12px de vão entre uma bolinha e outra. */
+}
+
+.slider-dots .dot {                    /* O desenho da bolinha de clique. */
+    display: block;                    /* Transforma a âncora <a>, que por padrão é de texto, em um "bloco" quadrado para podermos pintar o fundo. */
+    width: 12px;                       /* Define largura. */
+    height: 12px;                      /* Define altura. Como altura=largura, é um quadrado perfeito. */
+    background-color: rgba(255, 255, 255, 0.4); /* Fundo branco, mas com 40% de transparência (alfa), fica meio apagado. */
+    border-radius: 50%;                /* Quebra 50% de cada canto do quadrado. Adivinha? Ele vira um círculo! Mágica do CSS. */
+}
+
+.slider-dots .dot:hover {              /* Passou o mouse na bolinha transparente? */
+    background-color: #ffffff;         /* Ela vira branca forte e opaca. Sinalizando a escolha. */
+}
+
+.slider-controls {                     /* Caixa que segura as flechas direita/esquerda do banner. */
+    position: absolute;                /* Solta por cima da imagem igual as bolinhas. */
+    bottom: 30px;                      /* Levanta a 30px do chão da foto. */
+    right: 40px;                       /* Cola a caixa na direita da tela com 40px de recuo para não sumir no monitor. */
+    display: flex;                     /* Flexbox ativado pra colocar uma flecha do lado da outra. */
+    gap: 12px;                         /* Espaçamento entre os dois botões redondos de flecha. */
+}
+
+.slider-controls .icon {               /* O botão redondo escuro que tem a flecha dentro. */
+    display: flex;                     /* Flexbox dentro do botão pra alinhar o símbolo da flecha (</>) exatamente no centro. */
+    align-items: center;               /* Centralização vertical da setinha. */
+    justify-content: center;           /* Centralização horizontal da setinha. */
+    width: 36px;                       /* Tamanho do botão redondo. */
+    height: 36px;                      /* Altura do botão redondo. */
+    border: 1px solid rgb(255, 255, 255); /* Desenha a borda fina redonda e branca em volta da seta. */
+    border-radius: 50%;                /* Arredondamento no máximo pra ficar um círculo certinho. */
+    color: #ffffff;                    /* Pinta a setinha do HTML de branco. */
+    font-size: 30px;                   /* Deixa a seta grandona pro usuário ver e clicar fácil. */
+}
+
+.slider-controls .icon:hover {         /* Se colocar o mouse na setinha... */
+    border-color: #ffffff;             /* A borda branca fica. */
+    background-color: rgba(255, 255, 255, 0.1); /* Pinta o fundo vazio de branco, mas beeeeem ralinho (10%), criando um efeito lindo! */
+}
+
+/* TÓPICO 6: VITRINE DE PRODUTOS SNKRS */
+.destaques {                           /* A área toda que vai guardar a palavra SNKRS e os 3 tênis. */
+    padding: 60px 0;                   /* Distancia o conteúdo do banner (acima) e do rodapé (abaixo) com muita folga. */
+    text-align: center;                /* Mágica do inline-block: todos os 3 cards que virão abaixo ficarão centralizados automaticamente na tela. */
+}
+
+.titulo-snkrs {                        /* O título grandão da seção (transferi o código inútil do HTML para cá). */
+    margin-bottom: 40px;               /* Dá bastante espaço entre o título "SNKRS" e as fotos dos tênis. */
+}
+
+.card-produto {                        /* A caixa inteira individual onde o link da foto está guardado. */
+    display: inline-block;             /* Permite definir tamanho do card, mas sem empurrar os próximos pra linha de baixo. */
+    width: 31%;                        /* Cada caixa de foto fica com 31% do tamanho da tela. Cabem 3 e ainda sobram 7%. */
+    margin: 0 1%;                      /* Esse 1% pra cada lado nos 3 cards preenche perfeitamente os espaços vazios e afasta as imagens uma da outra. */
+}
+
+.card-produto img {                    /* Alvo final: As fotonas bonitas dos Air Force, Air Max e Dunk da Home. */
+    width: 100%;                       /* Diz pra foto preencher todos os 31% da caixa pai onde ela mora. */
+    background-color: #f5f5f5;         /* Coloca um cinzinha atrás das fotos pra dar contraste com a página branca. */
+    margin-bottom: 15px;               /* Apenas afasta um pouquinho por garantia. */
+    border-radius: 4px;                /* Arredonda levemente os 4 cantos da foto do tênis. */
+}
+
+/* TÓPICO 9: RODAPÉ DIVIDIDO (NIKE + VERTERE) */
+.rodape-simples {                      /* Envelopa todas as informações do rodapé. */
+    margin-top: 50px;                  /* Afasta do conteúdo principal da loja. */
+    padding: 0 20px 40px 20px;         /* Ajusta distâncias para as laterais e estufa a parte inferior. */
+    text-align: center;                /* Centraliza os textos que não têm alinhamento específico. */
+    background-color: #ffffff;         /* Garante o fundo branco puro. */
+}
+
+.footer-linha {                       /* A linha de separação fina na base do site. */
+    border: none;                      /* Remove o formato padrão de linha 3D do navegador. */
+    border-top: 1px solid #e5e5e5;     /* Linha limpa de 1 pixel na cor cinza clara. */
+    margin-bottom: 32px;               /* Afasta a linha do conteúdo logo abaixo dela. */
+}
+
+/* A CLASSE .footer-container FOI APAGADA AQUI PORQUE ERA INÚTIL. ELA JÁ TEM WIDTH 100% POR NATUREZA. */
+
+.footer-bloco {                        /* A técnica para dividir a tela em duas colunas. */
+    display: inline-block;             /* Coloca o bloco da Nike e o da Vertere lado a lado na mesma linha. */
+    width: 48%;                        /* Cada bloco ocupa quase metade da tela (sobra um pequeno respiro no meio). */
+    min-width: 280px;                  /* GAMBIARRA RESPONSIVA: Se a tela for menor que 280px (celular), não tem espaço e as caixas quebram para a linha de baixo sozinhas! */
+    vertical-align: top;               /* ADIÇÃO CRÍTICA: Força as duas caixas a ficarem alinhadas pelo topo. Sem isso, uma ficaria mais baixa que a outra. */
+    padding: 0 15px;                   /* Dá um respiro interno para o texto não colar no vão central. */
+    margin-bottom: 24px;               /* Margem para não amontoar caso ocorra a quebra de linha no celular. */
+}
+
+/* ÁREA DA NIKE (LADO ESQUERDO) */
+.footer-bottom-copy {                  /* Caixa do texto "Todos os direitos reservados". */
+    margin-bottom: 24px;               /* Afasta as redes sociais para baixo. */
+    font-size: 12px;                   /* Letra pequena padronizada. */
+    color: #757575;                    /* Cinza discreto. */
+}
+
+.footer-title {                        /* Subtítulos de ambas as colunas (Redes Sociais / Desenvolvido por). */
+    font-size: 14px;                   /* Tamanho equilibrado. */
+    font-weight: 900;                  /* Texto grosso chamativo. */
+    margin-bottom: 16px;               /* Empurra as listas debaixo para não grudar no título. */
+    color: #111111;                    /* Preto sólido para destaque. */
+}
+
+.icones-redes a {                      /* A tag <a> que embrulha cada foto do FB, IG, YT. */
+    display: inline-block;             /* Transforma o link em bloco para aceitar margens. */
+    margin: 0 12px;                    /* Cria o vão espaçado perfeito entre uma rede social e outra. */
+}
+
+.icones-redes img {                    /* A imagem dos ícones. */
+    width: 40px;                       /* Trava no tamanho pequeno, resolvendo o problema original de fotos estouradas. */
+}
+
+/* ÁREA DA VERTERE (LADO DIREITO) */
+.titulo-vertere {                      /* O nome "Desenvolvido por Vertere". */
+    text-transform: uppercase;         /* Força a escrita em CAIXA ALTA, dando um tom forte de marca corporativa. */
+}
+
+.texto-vertere {                       /* O descritivo "Consultoria de estratégia...". */
+    font-size: 12px;                   /* Letra discreta. */
+    color: #757575;                    /* Cinza, para não competir com o título. */
+    margin-bottom: 24px;               /* SUBSTITUI O PRIMEIRO <BR>: Cria o espaço necessário antes dos contatos usando CSS correto. */
+}
+
+.contato-vertere {                     /* A lista <ul> de telefones e emails. */
+    list-style: none;                  /* Remove as bolinhas HTML da frente dos itens. */
+    font-size: 13px;                   /* Tamanho sutil. */
+    color: #111111;                    /* Cor quase preta de leitura principal. */
+}
+
+.contato-vertere li {                  /* Cada linha da sua lista de contato. */
+    margin-bottom: 12px;               /* SUBSTITUI OS OUTROS <BR>: Gera o espaçamento entre o Email, o Telefone e a Localização. Fica perfeito e semântico. */
+}
+
+.contato-vertere strong {              /* Palavras chaves (E-mail:, Telefone:). */
+    color: #757575;                    /* Deixa os rótulos em cinza, destacando seus dados reais que estão em preto ao lado. */
+}
