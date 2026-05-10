@@ -59,7 +59,7 @@ header nav ul li a:hover {             /* Regra que só ativa quando o usuário 
 #hero-carousel {                       /* A área gigante que guarda as grandes imagens rotativas (banners). */
     position: relative;                /* Transforma essa área no ponto zero de referência para podermos colocar os botões soltos flutuando dentro dela. */
     width: 100%;                       /* O banner ocupa a tela inteira na largura. */
-    height: 35vw;                      /* Altura dinâmica baseada na largura da tela, mantém o aspecto Widescreen. */
+    height: 35px;                      /* Altura dinâmica baseada na largura da tela */
     min-height: 400px;                 /* Trava a altura em 400px. Assim, no celular a imagem não fica achatada parecendo um palito. */
     background-color: #f5f5f5;         /* Fundo cinza caso a imagem demore para carregar na internet lenta. */
 }
